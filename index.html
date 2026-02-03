@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Stutee ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #f9c5d1, #fde2e8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: #ffffff;
+      width: 360px;
+      padding: 44px 32px;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      color: #ff4d6d;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      font-size: 15px;
+      color: #888;
+    }
+
+    .code {
+      margin: 28px auto;
+      padding: 16px 18px;
+      background: #f6f6f6;
+      border-radius: 16px;
+      font-family: "SF Mono", "Courier New", monospace;
+      font-size: 14px;
+      color: #444;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .code .kw {
+      color: #ff4d6d;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 26px 0 24px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: #fff;
+    }
+
+    #yes:hover {
+      transform: scale(1.08);
+    }
+
+    #no {
+      background: #eeeeee;
+      position: absolute;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 18px;
+      opacity: 0.8;
+      animation: floatUp 6s linear forwards;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 0.9;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Stutee ❤️</h1>
+    <div class="subtitle">written with love</div>
+
+    <div class="code">
+      <span class="kw">const</span> myHeart = "Stutee";<br />
+      <span class="kw">while</span> (true) {<br />
+      &nbsp;&nbsp;chooseYou();<br />
+      }
+    </div>
+
+    <h2>Will you be my Valentine?</h2>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">Yes 💖</button>
+      <button id="no" onmouseover="moveNo()">No 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    let noTexts = [
+      "Are you sure? 🥺",
+      "Think again 💔",
+      "Please? 😔",
+      "One more time 🥹",
+      "Okay but… ❤️"
+    ];
+    let count = 0;
+
+    function moveNo() {
+      const btn = document.getElementById("no");
+      btn.style.left = Math.random() * 70 + "vw";
+      btn.style.top = Math.random() * 70 + "vh";
+      if (count < noTexts.length) {
+        btn.innerText = noTexts[count++];
+      }
+    }
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          background:linear-gradient(135deg,#f9c5d1,#fde2e8);
+          font-family:system-ui;
+        ">
+          <div style="
+            background:#ffffff;
+            padding:50px;
+            border-radius:30px;
+            text-align:center;
+            box-shadow:0 25px 50px rgba(0,0,0,0.2);
+          ">
+            <h1 style="color:#ff4d6d;">Yay ❤️</h1>
+            <p style="font-size:18px;color:#333;">
+              I promise this will always be my favorite decision.<br><br>
+              Happy Valentine’s Day 💖
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    setInterval(() => {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.innerText = "❤️";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.fontSize = Math.random() * 14 + 16 + "px";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 6000);
+    }, 450);
+  </script>
+
+</body>
+</html>
