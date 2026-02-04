@@ -8,7 +8,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background: #fdecef;
+  background: linear-gradient(135deg, #fde2e4, #f9c5d1, #d6c1e6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,35 +17,41 @@ body {
 }
 
 .card {
-  background: white;
-  padding: 48px 52px;
-  border-radius: 28px;
+  background: rgba(255,255,255,0.92);
+  padding: 52px 58px;
+  border-radius: 34px;
   text-align: center;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.22);
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
   color: #ff4d6d;
-  font-size: 34px;
+  font-size: 38px;
 }
 
 h2 {
-  font-size: 21px;
-  color: #333;
-  margin: 22px 0 30px;
+  font-size: 22px;
+  color: #444;
+  margin: 24px 0 32px;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 26px;
   position: relative;
   height: 64px;
 }
 
 button {
-  font-size: 17px;
-  padding: 12px 34px;
+  font-size: 18px;
+  padding: 14px 40px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
@@ -62,21 +68,28 @@ button {
   position: absolute;
 }
 
+/* HEART SLIDESHOW */
 .slideshow {
-  width: 180px;
-  height: 180px;
-  margin: 25px auto 0;
+  width: 260px;
+  height: 240px;
+  margin: 32px auto 0;
   position: relative;
+  clip-path: path("M130 220 C-40 100 40 -20 130 60 C220 -20 300 100 130 220 Z");
+  animation: pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .slide {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
   position: absolute;
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 1.6s ease;
 }
 
 .slide.active {
@@ -97,6 +110,11 @@ button {
   </div>
 </div>
 
+<!-- Soft background music -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/09/audio_6a5c2b8a74.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 function moveNo() {
   const no = document.getElementById("no");
@@ -105,11 +123,16 @@ function moveNo() {
 }
 
 function yesClicked() {
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.25;
+  music.play();
+
   document.body.innerHTML = `
-    <div style="height:100vh;display:flex;justify-content:center;align-items:center;background:#fdecef;text-align:center;">
-      <div style="background:white;padding:56px;border-radius:32px;box-shadow:0 20px 45px rgba(0,0,0,.2);">
-        <h1 style="color:#ff4d6d;">Yay, Stutee ❤️</h1>
-        <p style="font-size:21px;color:#444;line-height:1.5;">
+    <div style="height:100vh;display:flex;justify-content:center;align-items:center;
+    background:linear-gradient(135deg,#fde2e4,#f9c5d1,#d6c1e6);text-align:center;">
+      <div class="card" style="opacity:0;animation:fadeIn 1.4s ease forwards;animation-delay:.6s;">
+        <h1>Yay, Stutee ❤️</h1>
+        <p style="font-size:22px;color:#444;line-height:1.6;">
           Some people feel like a moment.<br>
           You feel like forever.<br><br>
           I’m so grateful I get to love you and be loved by you.<br><br>
@@ -117,11 +140,11 @@ function yesClicked() {
         </p>
 
         <div class="slideshow">
-          <img src="images/5.jpg" class="slide active">
-          <img src="images/3.jpg" class="slide">
-          <img src="images/2.jpg" class="slide">
-          <img src="images/4.jpg" class="slide">
-          <img src="images/1.jpg" class="slide">
+          <img src="/images/5.jpg" class="slide active">
+          <img src="/images/3.jpg" class="slide">
+          <img src="/images/2.jpg" class="slide">
+          <img src="/images/4.jpg" class="slide">
+          <img src="/images/1.jpg" class="slide">
         </div>
       </div>
     </div>
@@ -134,8 +157,8 @@ function yesClicked() {
       slides[i].classList.remove("active");
       i = (i + 1) % slides.length;
       slides[i].classList.add("active");
-    }, 2600);
-  }, 300);
+    }, 3200);
+  }, 1200);
 }
 </script>
 
