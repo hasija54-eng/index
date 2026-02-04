@@ -21,7 +21,7 @@ body {
   border-radius: 30px;
   text-align: center;
   box-shadow: 0 25px 60px rgba(0,0,0,0.2);
-  width: 340px;
+  width: 360px;
 }
 
 h1 {
@@ -67,7 +67,7 @@ button {
   margin: 28px auto 0;
   position: relative;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 26px;
   box-shadow: 0 18px 40px rgba(0,0,0,0.25);
 }
 
@@ -88,10 +88,6 @@ button {
 
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/10/09/audio_6a5c2b8a74.mp3" type="audio/mpeg">
-</audio>
-
 <div class="card" id="card">
   <h1>💖 Stutee 💖</h1>
   <h2>Will you be my Valentine?</h2>
@@ -104,19 +100,15 @@ button {
 
 <script>
 const yesBtn = document.getElementById("yes");
-const noBtn = document.getElementById("no");
-const music = document.getElementById("bgMusic");
+const noBtn  = document.getElementById("no");
 
 noBtn.addEventListener("mouseenter", () => {
   noBtn.style.position = "absolute";
   noBtn.style.left = Math.random() * 120 + "px";
-  noBtn.style.top = Math.random() * 30 + "px";
+  noBtn.style.top  = Math.random() * 30 + "px";
 });
 
 yesBtn.addEventListener("click", () => {
-  music.volume = 0.25;
-  music.play();
-
   document.getElementById("card").innerHTML = `
     <h1>Yay, Stutee ❤️</h1>
     <p style="font-size:21px;color:#444;line-height:1.6;">
@@ -127,11 +119,11 @@ yesBtn.addEventListener("click", () => {
     </p>
 
     <div class="slideshow">
-      <img src="/images/5.jpg" class="slide active">
-      <img src="/images/3.jpg" class="slide">
-      <img src="/images/2.jpg" class="slide">
-      <img src="/images/4.jpg" class="slide">
-      <img src="/images/1.jpg" class="slide">
+      <img src="/index/images/5.jpg" class="slide active">
+      <img src="/index/images/3.jpg" class="slide">
+      <img src="/index/images/2.jpg" class="slide">
+      <img src="/index/images/4.jpg" class="slide">
+      <img src="/index/images/1.jpg" class="slide">
     </div>
   `;
 
@@ -143,7 +135,7 @@ yesBtn.addEventListener("click", () => {
       i = (i + 1) % slides.length;
       slides[i].classList.add("active");
     }, 3000);
-  }, 600);
+  }, 500);
 });
 </script>
 
