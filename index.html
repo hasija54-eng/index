@@ -8,7 +8,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(135deg, #fde2e4, #f9c5d1, #d6c1e6);
+  background: linear-gradient(135deg,#fde2e4,#f9c5d1,#d6c1e6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,8 +16,9 @@ body {
   overflow: hidden;
 }
 
+/* CARD */
 .card {
-  background: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.94);
   padding: 52px 58px;
   border-radius: 34px;
   text-align: center;
@@ -26,7 +27,7 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -38,20 +39,21 @@ h1 {
 h2 {
   font-size: 22px;
   color: #444;
-  margin: 24px 0 32px;
+  margin: 22px 0 32px;
 }
 
+/* BUTTONS */
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 26px;
+  gap: 28px;
   position: relative;
-  height: 64px;
+  height: 60px;
 }
 
 button {
   font-size: 18px;
-  padding: 14px 40px;
+  padding: 14px 38px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
@@ -65,22 +67,25 @@ button {
 #no {
   background: #f1f1f1;
   color: #555;
-  position: absolute;
 }
 
 /* HEART SLIDESHOW */
 .slideshow {
-  width: 260px;
-  height: 240px;
-  margin: 32px auto 0;
+  width: 280px;
+  height: 260px;
+  margin: 36px auto 0;
   position: relative;
-  clip-path: path("M130 220 C-40 100 40 -20 130 60 C220 -20 300 100 130 220 Z");
-  animation: pulse 3.5s ease-in-out infinite;
+  animation: pulse 3.8s ease-in-out infinite;
+  clip-path: path(
+    "M140 240
+     C-40 120 40 -20 140 70
+     C240 -20 320 120 140 240 Z"
+  );
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
 .slide {
@@ -100,53 +105,54 @@ button {
 
 <body>
 
+<!-- Background music (kept OUTSIDE body replacement) -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/09/audio_6a5c2b8a74.mp3" type="audio/mpeg">
+</audio>
+
 <div class="card" id="card">
   <h1>💖 Stutee 💖</h1>
   <h2>Will you be my Valentine?</h2>
 
   <div class="buttons">
-    <button id="yes" onclick="yesClicked()">Yes ❤️</button>
-    <button id="no" onmouseenter="moveNo()">No 🙈</button>
+    <button id="yes">Yes ❤️</button>
+    <button id="no">No 🙈</button>
   </div>
 </div>
 
-<!-- Soft background music -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/10/09/audio_6a5c2b8a74.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-function moveNo() {
-  const no = document.getElementById("no");
-  no.style.left = Math.random() * 140 + "px";
-  no.style.top = Math.random() * 30 + "px";
-}
+const yesBtn = document.getElementById("yes");
+const noBtn  = document.getElementById("no");
+const music  = document.getElementById("bgMusic");
 
-function yesClicked() {
-  const music = document.getElementById("bgMusic");
+/* Move NO button ONLY on hover */
+noBtn.addEventListener("mouseenter", () => {
+  const container = document.querySelector(".buttons");
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * 140 + "px";
+  noBtn.style.top  = Math.random() * 20 + "px";
+});
+
+/* YES click */
+yesBtn.addEventListener("click", () => {
   music.volume = 0.25;
   music.play();
 
-  document.body.innerHTML = `
-    <div style="height:100vh;display:flex;justify-content:center;align-items:center;
-    background:linear-gradient(135deg,#fde2e4,#f9c5d1,#d6c1e6);text-align:center;">
-      <div class="card" style="opacity:0;animation:fadeIn 1.4s ease forwards;animation-delay:.6s;">
-        <h1>Yay, Stutee ❤️</h1>
-        <p style="font-size:22px;color:#444;line-height:1.6;">
-          Some people feel like a moment.<br>
-          You feel like forever.<br><br>
-          I’m so grateful I get to love you and be loved by you.<br><br>
-          <b>Happy Valentine’s Day 💖</b>
-        </p>
+  document.getElementById("card").innerHTML = `
+    <h1>Yay, Stutee ❤️</h1>
+    <p style="font-size:22px;color:#444;line-height:1.6;">
+      Some people feel like a moment.<br>
+      You feel like forever.<br><br>
+      I’m so grateful I get to love you and be loved by you.<br><br>
+      <b>Happy Valentine’s Day 💖</b>
+    </p>
 
-        <div class="slideshow">
-          <img src="/images/5.jpg" class="slide active">
-          <img src="/images/3.jpg" class="slide">
-          <img src="/images/2.jpg" class="slide">
-          <img src="/images/4.jpg" class="slide">
-          <img src="/images/1.jpg" class="slide">
-        </div>
-      </div>
+    <div class="slideshow">
+      <img src="/images/5.jpg" class="slide active">
+      <img src="/images/3.jpg" class="slide">
+      <img src="/images/2.jpg" class="slide">
+      <img src="/images/4.jpg" class="slide">
+      <img src="/images/1.jpg" class="slide">
     </div>
   `;
 
@@ -158,8 +164,8 @@ function yesClicked() {
       i = (i + 1) % slides.length;
       slides[i].classList.add("active");
     }, 3200);
-  }, 1200);
-}
+  }, 800);
+});
 </script>
 
 </body>
